@@ -4,7 +4,7 @@ import classes from './Header.module.css'
 const Header = () => {
     return (
     <header className={classes.header}>
-        <img src='https://st3.depositphotos.com/9627598/13904/v/450/depositphotos_139048386-stock-illustration-grunge-hand-drawn-black-paintbrush.jpg' />
+        <img src='https://www.pikpng.com/pngl/m/59-596262_wolf-png-logo-for-free-download-on-wolf.png' />
     </header>
     )
 }

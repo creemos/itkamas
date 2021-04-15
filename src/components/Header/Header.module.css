@@ -1,8 +1,13 @@
 .header {
+    display: flex;
     grid-area: h;
     background-color: lightsalmon;
+    align-items: center;
   }
   
 .header img {
+    position: flex;
     width: 50px;
+    margin-left: 10px;
+    
   }
