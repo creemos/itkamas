@@ -10,7 +10,9 @@
   margin: 0 auto;
 }
 
-
+.app-wrapper-content {
+  background-color: lightskyblue;
+}
 
 
 
