@@ -9,6 +9,10 @@ const MyPosts = () => {
       {id: 2, text: 'second post!', likesCount: 8}
     ]
 
+    let postsData = posts.map( p => {
+      return <Post message={p.text} likesCount={p.likesCount} />
+    })
+
     return (
         <div className={classes.posts}>
           <h2>My posts</h2>
@@ -17,8 +21,7 @@ const MyPosts = () => {
             <button>Add post</button>
           </div>
           <div className={classes.posts}>
-            <Post message={posts[0].text} likesCount={posts[0].likesCount}/>
-            <Post message={posts[1].text} likesCount={posts[1].likesCount}/>
+            { postsData }
           </div>
         </div>
     )
