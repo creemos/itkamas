@@ -3,8 +3,7 @@ import classes from './MyPosts.module.css'
 import Post from './Post/Post'
 
 const MyPosts = (props) => {
-
-    let postsData = props.posts.map( p => {
+    let postsData = props.posts.posts.map( p => {
       return <Post message={p.text} likesCount={p.likesCount} />
     })
 
