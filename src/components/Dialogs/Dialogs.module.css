@@ -4,7 +4,7 @@
 
 .dialogs {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 5fr;
 }
 
 .dialogsItems {
@@ -12,7 +12,19 @@
 }
 
 .dialog {
-    padding: 10px;
+    padding: 5px;
+    border: darkorchid 1px solid;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.dialog a {
+    text-decoration: none;
+    color: darkorchid;
+}
+
+.dialog:hover {
+    background-color:darkslateblue;
 }
 
 .messages {

@@ -1,26 +1,53 @@
 import React from 'react'
-import { BrowserRouter } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import classes from './Dialogs.module.css'
 
-const Dialogs = () => {
+const DialogItem = (props) => {
+    let path = '/dialogs/' + props.id
     return (
-        <BrowserRouter>
+        <div>
+            <div className={classes.dialog}><Link to={path}>{props.name}</Link></div>
+        </div>
+    )
+}
+
+const Messages = (props) => {
+    return(
+        <div className={classes.message}>
+            {props.text}
+        </div>
+    )
+}
+
+const Dialogs = (props) => {
+
+    let dialogsData = [
+        { name: 'Misha', id: 1 }, 
+        { name: 'Sasha', id: 2 }, 
+        { name: 'Ann', id: 3 }, 
+        { name: 'Olya', id: 4 }, 
+        { name: 'Dima', id: 5 }, 
+    ]
+
+    let messagesData = [
+        { id: 1, text: 'Hello!'},
+        { id: 2, text: 'its test string'},
+        { id: 3, text: 'nobody listen'}
+    ]
+        
+    return (
             <div className={classes.dialogs}>
                 <div className={classes.dialogItems}>
-                    <div className={classes.dialog}>Alex</div>
-                    <div className={classes.dialog}>Sasha</div>
-                    <div className={classes.dialog}>Ann</div>
-                    <div className={classes.dialog}>Ivan</div>
+                    <DialogItem name={dialogsData[0].name} id={dialogsData[0].id}/>
+                    <DialogItem name={dialogsData[1].name} id={dialogsData[1].id}/>
+                    <DialogItem name={dialogsData[2].name} id={dialogsData[2].id}/>
                 </div>
                 <div className={classes.messages}>
-                    <div className={classes.message}>Message 1</div>
-                    <div className={classes.message}>Message 2</div>
-                    <div className={classes.message}>Message 3</div>
-                    <div className={classes.message}>Message 4</div>
+                    <Messages text={messagesData[0].text}/>
+                    <Messages text={messagesData[1].text}/>
+                    <Messages text={messagesData[2].text}/>
                 </div>
             </div>
-        </BrowserRouter>
-        
     )
 }
 

@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
 import classes from './Post.module.css'
 
-const Post = ({message}) => {
+const Post = ({message, likesCount}) => {
 
-  const [likes, setLikes] = useState(0)
+  const [likes, setLikes] = useState(likesCount)
     return (
             <div className={classes.item}>
               <img src='https://upload.wikimedia.org/wikipedia/ru/thumb/c/ce/Aang.png/274px-Aang.png'/>

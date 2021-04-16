@@ -1,0 +1,8 @@
+.addPostForm {
+    display: flex;
+    gap: 5px;
+}
+
+.posts {
+    padding: 10px;
+}
