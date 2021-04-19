@@ -4,7 +4,7 @@ import Navbar from './components/Navbar/Navbar';
 import Profile from './components/Profile/Profile'
 import Dialogs from './components/Dialogs/Dialogs'
 import React from "react";
-import { Route, BrowserRouter, Router, Redirect } from 'react-router-dom';
+import { Route, BrowserRouter, Redirect } from 'react-router-dom';
 import MainSettings from './components/MainSettings/MainSettings';
 import Music from './components/Music/Music';
 import News from './components/News/News';
@@ -19,7 +19,7 @@ const App = (props) => {
       <Navbar />
       <div className='app-wrapper-content'>
         <Route path='/dialogs' component={() => <Dialogs state={props.appState} />} />
-        <Route path='/profile' component={() => <Profile state={props.appState} />} />
+        <Route path='/profile' component={() => <Profile state={props.appState} addPost={props.addPost}/>} />
         <Route path='/news' component={() => <News />} />
         <Route path='/settings' component={() => <MainSettings />} />
         <Route path='/music' component={() => <Music />} />

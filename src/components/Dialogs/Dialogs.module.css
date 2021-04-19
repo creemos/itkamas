@@ -27,8 +27,10 @@
     background-color:darkslateblue;
 }
 
-.messages {
-
+.addMessageForm {
+    display: flex;
+    gap: 5px;
+    align-self: flex-end;
 }
 
 .message {

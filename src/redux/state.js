@@ -1,3 +1,4 @@
+import { rerenderFullTree } from "../render"
 
 let state = {
 
@@ -14,7 +15,8 @@ let state = {
         { name: 'Sasha', id: 2 }, 
         { name: 'Ann', id: 3 }, 
         { name: 'Olya', id: 4 }, 
-        { name: 'Dima', id: 5 }, 
+        { name: 'Dima', id: 5 },
+        { name: 'Max', id: 6 } 
       ],
       
     messagesData: [
@@ -23,6 +25,16 @@ let state = {
         { id: 3, text: 'nobody listen'}
       ]
     }
+}
+
+export let addPost = (postMessage) => {
+  let newPost = {
+    id: 5,
+    text: postMessage,
+    likesCount: 0
+  }
+  state.profilePage.posts.push(newPost)
+  rerenderFullTree(state)
 }
 
 export default state
