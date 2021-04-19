@@ -6,7 +6,8 @@ let state = {
       posts: [
         {id: 1, text: 'first post!', likesCount: 22},
         {id: 2, text: 'second post!', likesCount: 8}
-      ]
+      ],
+      newPostText: 'new post text'
     },
 
     messagesPage: {
@@ -36,5 +37,6 @@ export let addPost = (postMessage) => {
   state.profilePage.posts.push(newPost)
   rerenderFullTree(state)
 }
+
 
 export default state
