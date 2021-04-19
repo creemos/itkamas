@@ -1,7 +1,17 @@
-import state from './redux/state'
-import {rerenderFullTree} from './render'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import store from './redux/store'
 
-rerenderFullTree(state)
 
+let rerenderFullTree = (state) => {
+  ReactDOM.render(
+    <App appState={store}/>,
+  document.getElementById('root')
+);
+}
 
+rerenderFullTree()
 
+store.subscribe(rerenderFullTree)

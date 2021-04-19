@@ -4,8 +4,7 @@ import Messages from './Messages'
 import classes from './Dialogs.module.css'
 
 const Dialogs = (props) => {
-
-    let {dialogsData, messagesData} = props.state.messagesPage
+    let {dialogsData, messagesData, messageText} = props.messagesPage
 
     let newDialogsData = dialogsData.map(item => {
         return <DialogItem name={item.name} id={item.id} />
@@ -18,8 +17,12 @@ const Dialogs = (props) => {
     let newMessageText = React.createRef()
 
     let addMessage = () => {
-        alert(newMessageText.current.value)
-        
+        props.addMessage()
+    }
+
+    let onChangeMessage = () => {
+        let text = newMessageText.current.value
+        props.updateMessageText(text)
     }
 
     return (
@@ -30,7 +33,9 @@ const Dialogs = (props) => {
                 <div className={classes.messages}>
                     {newMessagesData}
                     <div className={classes.addMessageForm}>
-                        <textarea ref={newMessageText}></textarea>
+                        <textarea   ref={newMessageText} 
+                                    value={messageText} 
+                                    onChange={onChangeMessage}></textarea>
                         <button button onClick={ addMessage }>Add message</button>
                     </div>
                     
