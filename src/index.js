@@ -5,9 +5,10 @@ import App from './App';
 import store from './redux/store'
 
 
-let rerenderFullTree = (state) => {
+let rerenderFullTree = () => {
   ReactDOM.render(
-    <App appState={store}/>,
+    <App appState={store.getState()} 
+    dispatch={store.dispatch.bind(store)} />,
   document.getElementById('root')
 );
 }

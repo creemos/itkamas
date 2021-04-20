@@ -3,7 +3,6 @@ import classes from './MyPosts.module.css'
 import Post from './Post/Post'
 
 const MyPosts = (props) => {
-  debugger
     let postsData = props.state.posts.map( p => {
       return <Post message={p.text} likesCount={p.likesCount} />
     })
@@ -11,12 +10,15 @@ const MyPosts = (props) => {
     let newPostElement = React.createRef()
 
     let addPost = () => {
-      props.addPost()
+      props.dispatch({type: 'ADD-POST'})
     }
 
     let onTextChange = () => {
         let text = newPostElement.current.value 
-        props.updatePostText(text)
+        props.dispatch({
+          type: 'UPDATE-POST-TEXT',
+          newText: text
+        })
     }
 
     return (
