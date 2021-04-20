@@ -1,3 +1,10 @@
+import {
+    profileReducer
+} from './profileReducer'
+import {
+    dialogsReducer
+} from './dialogsReducer'
+
 let store = {
 
     _state: {
@@ -59,6 +66,8 @@ let store = {
 
             messageText: 'new message'
         },
+
+        sidebar: {}
     },
 
     getState() {
@@ -74,56 +83,23 @@ let store = {
     },
 
     dispatch(action) {
-
-        switch (action.type) {
-            case 'ADD-POST': {
-                let newPost = {
-                    id: 5,
-                    text: this._state.profilePage.newPostText,
-                    likesCount: 0
-                }
-                this._state.profilePage.posts.push(newPost)
-                this._state.profilePage.newPostText = ''
-                this.rerenderFullTree(this._state)
-                break
-            }
-            case 'UPDATE-POST-TEXT': {
-                this._state.profilePage.newPostText = action.newText
-                this.rerenderFullTree(this._state)
-                break
-            }
-            case 'ADD-MESSAGE': {
-                let newMessage = {
-                    id: 4,
-                    text: this._state.messagesPage.messageText
-                }
-                this._state.messagesPage.messagesData.push(newMessage)
-                this._state.messagesPage.messageText = ''
-                this.rerenderFullTree(this._state)
-                break
-            }
-
-            case 'UPDATE-MESSAGE-TEXT': {
-                this._state.messagesPage.messageText = action.newText
-                this.rerenderFullTree(this._state)
-                break
-            }
-
-        }
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.messagesPage = dialogsReducer(this._state.messagesPage, action)
+        this.rerenderFullTree(this._state)
     }
 }
 
 export const addPostActionCreator = () => {
     return {
-      type: 'ADD-POST'
+        type: 'ADD-POST'
     }
-  }
+}
 
 export const updatePostTextActionCreator = (text) => {
-      return {
+    return {
         type: 'UPDATE-POST-TEXT',
         newText: text
-      }
-  }
+    }
+}
 
 export default store
