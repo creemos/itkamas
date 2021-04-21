@@ -2,12 +2,12 @@ import './App.css';
 import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
 import Profile from './components/Profile/Profile'
-import Dialogs from './components/Dialogs/Dialogs'
 import React from "react";
 import { Route, BrowserRouter, Redirect } from 'react-router-dom';
 import MainSettings from './components/MainSettings/MainSettings';
 import Music from './components/Music/Music';
 import News from './components/News/News';
+import DialogsContainer from './components/Dialogs/DialogsContainer';
 
 const App = (props) => {
   return (
@@ -16,7 +16,7 @@ const App = (props) => {
       <Header />
       <Navbar />
       <div className='app-wrapper-content'>
-        <Route path='/dialogs' component={() => <Dialogs  messagesPage={props.appState.messagesPage} 
+        <Route path='/dialogs' component={() => <DialogsContainer  messagesPage={props.appState.messagesPage} 
                                                           dispatch={props.dispatch} />} />
         <Route path='/profile' component={() => <Profile  state={props.appState.profilePage} 
                                                           dispatch={props.dispatch} />} />
