@@ -10,6 +10,8 @@ const Nav = () => {
         <div className={classes.item}><Link to='/news'>News</Link></div>
         <div className={classes.item}><Link to='/music'>Music</Link></div>
         <div className={classes.item}><Link to='/settings'>Settings</Link></div>
+        <br />
+        <div className={classes.item}><Link to='/users'>Users</Link></div>
       </nav>
     )
 }

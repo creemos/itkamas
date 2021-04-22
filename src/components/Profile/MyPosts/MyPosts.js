@@ -3,7 +3,6 @@ import classes from './MyPosts.module.css'
 import Post from './Post/Post'
 
 const MyPosts = (props) => {
-  debugger
     let postsData = props.profilePage.posts.map( p => {
       return <Post message={p.text} likesCount={p.likesCount} />
     })
@@ -25,6 +24,7 @@ const MyPosts = (props) => {
           <div className={classes.addPostForm}>
             <textarea ref={newPostElement} 
                       value = {props.profilePage.newPostText} 
+                      placeholder='Write new post'
                       onChange={ onTextChange }/>
             <button onClick={ onAddPost }>Add post</button>
           </div>

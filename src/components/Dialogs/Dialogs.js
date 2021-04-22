@@ -7,12 +7,11 @@ const Dialogs = (props) => {
     let {dialogsData, messagesData, messageText} = props
 
     let newDialogsData = dialogsData.map(item => {
-        return <DialogItem name={item.name} id={item.id} />
+        return <DialogItem name={item.name} id={item.id} key={item.id} />
     })
 
     let newMessagesData = messagesData.map(item => {
-        debugger
-        return <Messages text={item.text} />
+        return <Messages text={item.text} key={item.id}/>
     })
 
     let newMessageText = React.createRef()

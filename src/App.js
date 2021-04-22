@@ -9,6 +9,7 @@ import Music from './components/Music/Music';
 import News from './components/News/News';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import store from './redux/reduxStore';
+import UsersContainer from './components/Users/UsersContainer';
 
 const App = () => {
   return (
@@ -21,7 +22,7 @@ const App = () => {
         <Route path='/news' component={() => <News />} />
         <Route path='/settings' component={() => <MainSettings />} />
         <Route path='/music' component={() => <Music />} />
-        <Redirect from='/' to='/profile' />
+        <Route path='/users' component={() => <UsersContainer store = {store} />} />
       </div>
     </div>
   );

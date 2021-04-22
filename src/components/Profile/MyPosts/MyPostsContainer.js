@@ -5,7 +5,6 @@ import MyPosts from './MyPosts'
 
 
 const mapStateToProps = (state) => {
-    debugger
     return {
         profilePage: state.profilePage
     }
