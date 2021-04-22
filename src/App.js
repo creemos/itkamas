@@ -8,7 +8,6 @@ import MainSettings from './components/MainSettings/MainSettings';
 import Music from './components/Music/Music';
 import News from './components/News/News';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
-import store from './redux/reduxStore';
 import UsersContainer from './components/Users/UsersContainer';
 
 const App = () => {

@@ -7,7 +7,7 @@ const UsersItem = (props) => {
     let buttonName = props.followed === 'true' ? 'Unfollow' : 'Follow'
     return (
         <div>
-            <div>id: {props.id}, Full Name: {props.fullname}
+            <div>id: {props.id}, Name: {props.name}
             <button onClick={() => toggleFollow(props.id)}>{buttonName}</button>
             </div>
         </div>

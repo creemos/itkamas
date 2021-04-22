@@ -1,5 +1,6 @@
 let initialState = {
     users: [
+        /*
         {
             id: 1,
             avatar: null,
@@ -22,6 +23,7 @@ let initialState = {
             status: 'Love life',
             followed: false
         }
+        */
     ]
 }
 
