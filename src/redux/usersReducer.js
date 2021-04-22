@@ -38,8 +38,10 @@ const usersReducer = (state = initialState, action) => {
                         return next
                     } else return u
                 })}
-            console.log(newState)
             return newState
+        }
+        case 'SET-USERS': {
+            return {...state, users: [...state.users, ...action.users]}
         }
         default: return state
     }
@@ -50,7 +52,13 @@ export const followToggleAC = id => {
         type: 'FOLLOW-TOGGLE',
         userId: id
     }
-    
+}
+
+export const setUsersAC = (users) => {
+    return {
+        type: 'SET-USERS',
+        users
+    }
 }
 
 export default usersReducer
