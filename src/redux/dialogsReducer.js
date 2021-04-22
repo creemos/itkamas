@@ -39,7 +39,7 @@ let initialState = {
         }
     ],
 
-    messageText: 'new message'
+    messageText: ''
 }
 
 export const dialogsReducer = (state = initialState, action) => {
@@ -50,14 +50,17 @@ export const dialogsReducer = (state = initialState, action) => {
                 id: 4,
                 text: state.messageText
             }
-            state.messagesData.push(newMessage)
-            state.messageText = ''
-            break
+            let newState = {...state}
+            newState.messagesData = [...state.messagesData]
+            newState.messagesData.push(newMessage)
+            newState.messageText = ''
+            return newState
         }
 
         case 'UPDATE-MESSAGE-TEXT': {
-            state.messageText = action.newText
-            break
+            let newState = {...state}
+            newState.messageText = action.newText
+            return newState
         }
 
     }

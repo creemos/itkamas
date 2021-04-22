@@ -22,13 +22,16 @@ export const profileReducer = (state = initialState, action) => {
                 text: state.newPostText,
                 likesCount: 0
             }
-            state.posts.push(newPost)
-            state.newPostText = ''
-            break
+            let newState = {...state}
+            newState.posts = [...state.posts]
+            newState.posts.push(newPost)
+            newState.newPostText = ''
+            return newState
         }
         case 'UPDATE-POST-TEXT': {
-            state.newPostText = action.newText
-            break
+            let newState = {...state}
+            newState.newPostText = action.newText
+            return newState
         }
 
     }
