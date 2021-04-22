@@ -2,25 +2,30 @@ import axios from 'axios'
 import React from 'react'
 import UsersItem from './UsersItem'
 
+class Users extends React.Component {
 
-let Users = (props) => {
-    if (props.users.length === 0) {
+    userList = this.props.users.map( u => {
+        return <UsersItem id={u.id} key={u.id} name={u.name} followed={u.followed.toString()} toggleFollow={this.props.toggleFollow} />
+    })
+
+    getUsers = () => {
+        if (this.props.users.length === 0) {
         axios
             .get('https://social-network.samuraijs.com/api/1.0/users')
             .then(response => {
-                debugger
-                props.setUsers(response.data.items)
+                this.props.setUsers(response.data.items)
             })
-        
+        }
     }
-    let userList = props.users.map( u => {
-        return <UsersItem id={u.id} key={u.id} name={u.name} followed={u.followed.toString()} toggleFollow={props.toggleFollow} />
-    })
-    return (
-        <div>
-            {userList}
-        </div>
-    )
+
+    render() {
+        return (
+            <div>
+                <button onClick={this.getUsers}>GET LIST</button>
+                {this.userList}
+            </div>
+        )
+    }
 }
 
 export default Users
