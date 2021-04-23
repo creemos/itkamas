@@ -5,13 +5,19 @@ import React from 'react'
 class Users extends React.Component {
 componentDidMount() {
     axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-        .then(response =>
-            
-            { 
+        .then(response => { 
                 debugger
-                this.props.setUsers(response.data.items)}
-            
-            )}
+                this.props.setUsers(response.data.items)
+                this.props.setTotalUsersCount(response.data.totalCount)
+            })}
+onPageChanged = (i) => {
+    this.props.setCurrentPage(i)
+    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${i}&count=${this.props.pageSize}`)
+        .then(response => {
+            this.props.setUsers(response.data.items)
+
+        })
+}
 
     render() {
 
@@ -27,16 +33,28 @@ componentDidMount() {
         return (
             <div>
                 <div>
-                    {pages.map( i => <span className={this.props.currentPage === i && classes.selectedPage}
-                    onClick={(i) => this.props.setCurrentPage(i)}>{i}</span>)}
+                    {pages.map( i => {
+                        if (i > 40) {
+                            return
+                        } else {
+                            return <span className={this.props.currentPage === i && classes.selectedPage} 
+                                     onClick={(e) => { this.onPageChanged(i)}}>|{i}|</span>
+                                     }
+                        }
+                        )}
+                        <hr />
                 </div>
                 {this.props.users.map( u => {
                      return <div>
-                                <div>id: {u.id}, Name: {u.name}
+                                <div div > < img src = {
+                                    u.photos.small ? u.photos.small : 'https://avotar.ru/avatar/minony/avatarka.gif'
+                                }
+                                />id: {u.id}, Name: {u.name}
                                 <button onClick={() => toggleFollow(u.id)}>{buttonName}</button>
                                 </div>
                             </div>
                 })}
+                <p>smotri 36 stranicu</p>
             </div>
         )
     }
