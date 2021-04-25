@@ -45,14 +45,17 @@ onPageChanged = (i) => {
                         <hr />
                 </div>
                 {this.props.users.map( u => {
-                     return <div>
-                                <div div > < img src = {
-                                    u.photos.small ? u.photos.small : 'https://avotar.ru/avatar/minony/avatarka.gif'
-                                }
-                                />id: {u.id}, Name: {u.name}
-                                <button onClick={() => toggleFollow(u.id)}>{buttonName}</button>
+                     return <div className={classes.container}>
+                                <div className={classes.divInfo}>
+                                    <div className={classes.imgfollow}>
+                                        <img src = {u.photos.small ? u.photos.small : 'https://avotar.ru/avatar/minony/avatarka.gif'} />
+                                        <button onClick={() => toggleFollow(u.id)}>{buttonName}</button>
+                                    </div>
+                                <div>
+                                    <p>id: {u.id}</p><p>Name: {u.name}</p><p>Status: {u.status}</p>
                                 </div>
                             </div>
+                     </div>
                 })}
                 <p>smotri 36 stranicu</p>
             </div>

@@ -6,3 +6,23 @@
 div span {
     cursor: pointer;
 }
+
+.container {
+    padding: 5px;
+    border: aqua 1px solid;
+    border-radius: 5px;
+    margin: 10px;
+    background-color: darkseagreen;
+    align-items: center;
+}
+
+.divInfo {
+    display: grid;
+    grid-template-columns: 1fr 20fr;
+    gap: 10px;
+}
+
+.imgfollow {
+    display: grid;
+    gap: 3px;
+}
