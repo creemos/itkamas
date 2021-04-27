@@ -3,11 +3,11 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 import Users from './Users'
 import {
-    followToggleAC,
-    setUsersAC,
-    setCurrentPageAC,
-    setTotalUsersCountAC,
-    toggleIsLoadingAC
+    toggleFollow,
+    setUsers,
+    setCurrentPage,
+    setTotalUsersCount,
+    toggleIsLoading
 } from '../../redux/usersReducer'
 import Preloader from '../Common/Preloader'
 
@@ -23,6 +23,7 @@ class UsersAPI extends React.Component {
                 this.props.toggleIsLoading(false)
             })
     }
+    
     onPageChanged = (i) => {
         this.props.toggleIsLoading(true)
         this.props.setCurrentPage(i)
@@ -58,25 +59,12 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        toggleFollow: (userId) => {
-            dispatch(followToggleAC(userId))
-        },
-        setUsers: (users) => {
-            dispatch(setUsersAC(users))
-        },
-        setCurrentPage: (page) => {
-            dispatch(setCurrentPageAC(page))
-        },
-        setTotalUsersCount: (totalUsersCount) => {
-            dispatch(setTotalUsersCountAC(totalUsersCount))
-        },
-        toggleIsLoading: (isLoading) => {
-            dispatch(toggleIsLoadingAC(isLoading))
-        }
-
-    }
+const mapDispatchToProps =  {
+        toggleFollow,
+        setUsers,
+        setCurrentPage,
+        setTotalUsersCount,
+        toggleIsLoading
 }
 
 const UserContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPI)

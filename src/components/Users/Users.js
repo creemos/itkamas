@@ -1,5 +1,6 @@
 import React from 'react'
 import classes from './Users.module.css'
+import {Link} from 'react-router-dom'
 
 const Users = (props) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
@@ -24,7 +25,10 @@ const Users = (props) => {
                     <div className = {classes.container}>
                         <div className = {classes.divInfo}>
                                 <div className = {classes.imgfollow}>
-                                <img src = {u.photos.small ? u.photos.small : 'https://avotar.ru/avatar/minony/avatarka.gif'} alt = '' />
+                                    <Link to={'/profile/' + u.id}>
+                                        <img src = {u.photos.small ? u.photos.small : 'https://avotar.ru/avatar/minony/avatarka.gif'} alt = '' />
+                                    </Link>
+                                
                                 <button onClick = {() => toggleFollow(u.id)} > {buttonName} </button> 
                                 </div> 
                                 <div>
@@ -33,7 +37,7 @@ const Users = (props) => {
                             </div> 
                         </div>)
             })
-        } <p> smotri 36 stranicu </p> 
+        } 
         </div>
     )
 }

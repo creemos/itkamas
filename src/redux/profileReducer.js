@@ -10,7 +10,8 @@ let initialState = {
             likesCount: 8
         }
     ],
-    newPostText: ''
+    newPostText: '',
+    profile: null
 }
 
 
@@ -35,8 +36,19 @@ export const profileReducer = (state = initialState, action) => {
             newState.newPostText = action.newText
             return newState
         }
+
+        case 'SET-USER-PROFILE': {
+            return {...state, profile: action.profile }
+        }
+
         default: {
             return state
         }
+    }
+}
+
+export const setUserProfile = (profile) => {
+    return {
+        type: 'SET-USER-PROFILE', profile
     }
 }
