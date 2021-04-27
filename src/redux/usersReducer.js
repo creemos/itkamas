@@ -1,10 +1,11 @@
 let initialState = {
-    users: [
-        /*
+    users: [/*
         {
             id: 1,
-            avatar: null,
-            fullname: 'Vasya D.',
+            photos: {
+                'small': 'https://avotar.ru/avatar/minony/avatarka.gif'
+            },
+            name: 'Vasya D.',
             location: {
                 city: 'Saratov',
                 country: 'Belarus'
@@ -14,8 +15,10 @@ let initialState = {
         },
         {
             id: 2,
-            avatar: null,
-            fullname: 'Sasha E.',
+            photos: {
+                'small': 'https://avotar.ru/avatar/minony/avatarka.gif'
+            },
+            name: 'Sasha E.',
             location: {
                 city: 'Kiev',
                 country: 'Ukraine'
@@ -23,11 +26,11 @@ let initialState = {
             status: 'Love life',
             followed: false
         }
-        */
-    ],
+    */ ],
     pageSize: 5,
     totalUsersCount: 0,
-    currentPage: 2
+    currentPage: 2,
+    isLoading: false
 }
 
 
@@ -52,6 +55,9 @@ const usersReducer = (state = initialState, action) => {
         }
         case 'SET-TOTAL-USERS-COUNT': {
             return {...state, totalUsersCount: action.totalUsersCount}
+        }
+        case 'TOGGLE-IS-LOADING': {
+            return {...state, isLoading: action.isLoading}
         }
         default: return state
     }
@@ -82,6 +88,13 @@ export const setTotalUsersCountAC = (totalUsersCount) => {
     return {
         type: 'SET-TOTAL-USERS-COUNT',
         totalUsersCount
+    }
+}
+
+export const toggleIsLoadingAC = (isLoading) => {
+    return {
+        type: 'TOGGLE-IS-LOADING',
+        isLoading
     }
 }
 

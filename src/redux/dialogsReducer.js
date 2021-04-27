@@ -63,7 +63,8 @@ export const dialogsReducer = (state = initialState, action) => {
             newState.messageText = action.newText
             return newState
         }
-
+        default: {
+           return state 
+        }
     }
-    return state
 }
