@@ -4,6 +4,9 @@ import {Link} from 'react-router-dom'
 
 const Users = (props) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
+    if (pagesCount > 30) {
+        pagesCount = 30
+    }
     let pages = []
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
@@ -15,9 +18,8 @@ const Users = (props) => {
     return ( 
         <div>
             <div> {pages.map(i => {
-                        while ( i < 30 )  {
                             return <span className = {props.currentPage === i && classes.selectedPage} onClick = {(e) => {props.onPageChanged(i)}} > | {i} | </span>
-                        }})} 
+                        })} 
             <hr />
             </div> 
             {props.users.map(u => {

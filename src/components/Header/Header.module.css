@@ -11,3 +11,13 @@
     margin-left: 10px;
     
   }
+
+.loginBlock {
+  margin-right: 10px;
+  margin-left: auto;
+}
+.loginBlock a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}

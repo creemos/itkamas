@@ -1,10 +1,15 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import classes from './Header.module.css'
+import logo from './../../avatarka-pustaya.jpg'
 
-const Header = () => {
+const Header = (props) => {
     return (
     <header className={classes.header}>
-        <img src='https://www.pikpng.com/pngl/m/59-596262_wolf-png-logo-for-free-download-on-wolf.png' alt=''/>
+        <img src={logo} alt='noimage'/>
+        <div className={classes.loginBlock}>
+            {!props.isAuth ? <Link to='/login'>LOGIN</Link> : <div>{props.login}</div>}
+        </div>
     </header>
     )
 }
