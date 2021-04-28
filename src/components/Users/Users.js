@@ -43,13 +43,13 @@ const Users = (props) => {
     return ( 
         <div>
             <div> {pages.map(i => {
-                            return <span className = {props.currentPage === i ? classes.selectedPage : null} onClick = {(e) => {props.onPageChanged(i)}} > | {i} | </span>
+                            return <span key={`page-${i}`} className = {props.currentPage === i ? classes.selectedPage : null} onClick = {(e) => {props.onPageChanged(i)}} > | {i} | </span>
                         })} 
             <hr />
             </div> 
             {props.users.map(u => {
                 return (
-                    <div className = {classes.container}>
+                    <div key={`user-${u.id}`} className = {classes.container}>
                         <div className = {classes.divInfo}>
                                 <div className = {classes.imgfollow}>
                                     <Link to={'/profile/' + u.id}>
