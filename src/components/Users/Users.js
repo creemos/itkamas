@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'
 import classes from './Users.module.css'
 import {Link} from 'react-router-dom'
 
@@ -11,14 +12,38 @@ const Users = (props) => {
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
     }
-    const toggleFollow = (id) => {
-        props.toggleFollow(id)
+    const toggleFollow = (user) => {
+        
+        if (user.followed) {
+            axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {
+                withCredentials: true,
+                headers: {
+                    'API-KEY': '20abb38d-9d20-430d-b607-eb6ffb3049c4'
+                }
+            })
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    props.toggleFollow(user.id)
+                }
+            })
+        } else {
+            axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {}, {
+                withCredentials: true,
+                headers: {
+                    'API-KEY': '20abb38d-9d20-430d-b607-eb6ffb3049c4'
+                }
+            })
+            .then(response => {
+                    if (response.data.resultCode === 0) {
+                        props.toggleFollow(user.id)
+                    }
+                })
+        } 
     }
-    let buttonName = props.followed === 'true' ? 'Unfollow' : 'Follow'
     return ( 
         <div>
             <div> {pages.map(i => {
-                            return <span className = {props.currentPage === i && classes.selectedPage} onClick = {(e) => {props.onPageChanged(i)}} > | {i} | </span>
+                            return <span className = {props.currentPage === i ? classes.selectedPage : null} onClick = {(e) => {props.onPageChanged(i)}} > | {i} | </span>
                         })} 
             <hr />
             </div> 
@@ -31,7 +56,7 @@ const Users = (props) => {
                                         <img src = {u.photos.small ? u.photos.small : 'https://avotar.ru/avatar/minony/avatarka.gif'} alt = '' />
                                     </Link>
                                 
-                                <button onClick = {() => toggleFollow(u.id)} > {buttonName} </button> 
+                                <button onClick = {() => toggleFollow(u)} > {u.followed? 'Unfollow' : 'Follow'} </button> 
                                 </div> 
                                 <div>
                                 <p> id: {u.id} </p><p>Name: {u.name}</p > <p> Status: {u.status} </p> 
