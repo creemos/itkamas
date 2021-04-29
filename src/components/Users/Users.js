@@ -1,7 +1,7 @@
 import React from 'react'
-import axios from 'axios'
 import classes from './Users.module.css'
 import {Link} from 'react-router-dom'
+import { UserAPI }from '../../api/api'
 
 const Users = (props) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
@@ -15,30 +15,24 @@ const Users = (props) => {
     const toggleFollow = (user) => {
         
         if (user.followed) {
-            axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {
-                withCredentials: true,
-                headers: {
-                    'API-KEY': '20abb38d-9d20-430d-b607-eb6ffb3049c4'
-                }
-            })
+            props.toggleFollowingInProgress(true, user.id)
+            UserAPI.unfollowUser(user.id)
             .then(response => {
                 if (response.data.resultCode === 0) {
                     props.toggleFollow(user.id)
+                    props.toggleFollowingInProgress(false, user.id)
                 }
             })
         } else {
-            axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {}, {
-                withCredentials: true,
-                headers: {
-                    'API-KEY': '20abb38d-9d20-430d-b607-eb6ffb3049c4'
-                }
-            })
+            props.toggleFollowingInProgress(true, user.id)
+            UserAPI.followUser(user.id)
             .then(response => {
                     if (response.data.resultCode === 0) {
                         props.toggleFollow(user.id)
+                        props.toggleFollowingInProgress(false, user.id)
                     }
                 })
-        } 
+        }
     }
     return ( 
         <div>
@@ -48,6 +42,7 @@ const Users = (props) => {
             <hr />
             </div> 
             {props.users.map(u => {
+                debugger
                 return (
                     <div key={`user-${u.id}`} className = {classes.container}>
                         <div className = {classes.divInfo}>
@@ -56,7 +51,7 @@ const Users = (props) => {
                                         <img src = {u.photos.small ? u.photos.small : 'https://avotar.ru/avatar/minony/avatarka.gif'} alt = '' />
                                     </Link>
                                 
-                                <button onClick = {() => toggleFollow(u)} > {u.followed? 'Unfollow' : 'Follow'} </button> 
+                                <button onClick = {() => toggleFollow(u)} disabled={props.followingInProgress.some(id => id === u.id)}> {u.followed? 'Unfollow' : 'Follow'} </button> 
                                 </div> 
                                 <div>
                                 <p> id: {u.id} </p><p>Name: {u.name}</p > <p> Status: {u.status} </p> 

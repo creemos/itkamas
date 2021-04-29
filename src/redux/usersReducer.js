@@ -29,8 +29,9 @@ let initialState = {
     */ ],
     pageSize: 5,
     totalUsersCount: 0,
-    currentPage: 2,
-    isLoading: false
+    currentPage: 1,
+    isLoading: false,
+    followingInProgress: []
 }
 
 
@@ -58,6 +59,12 @@ const usersReducer = (state = initialState, action) => {
         }
         case 'TOGGLE-IS-LOADING': {
             return {...state, isLoading: action.isLoading}
+        }
+
+        case 'FOLLOWING-IN-PROGRESS': {
+            return {...state, followingInProgress: action.followingInProgress ?
+                   [...state.followingInProgress, action.id] : 
+                   state.followingInProgress.filter(id => id != action.id)}
         }
         default: return state
     }
@@ -95,6 +102,12 @@ export const toggleIsLoading = (isLoading) => {
     return {
         type: 'TOGGLE-IS-LOADING',
         isLoading
+    }
+}
+
+export const toggleFollowingInProgress = (followingInProgress, id) => {
+    return {
+        type: 'FOLLOWING-IN-PROGRESS', followingInProgress, id
     }
 }
 
