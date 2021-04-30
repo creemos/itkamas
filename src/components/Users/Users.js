@@ -27,7 +27,6 @@ const Users = (props) => {
             <hr />
             </div> 
             {props.users.map(u => {
-                debugger
                 return (
                     <div key={`user-${u.id}`} className = {classes.container}>
                         <div className = {classes.divInfo}>
