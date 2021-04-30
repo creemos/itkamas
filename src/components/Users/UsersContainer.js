@@ -7,29 +7,21 @@ import {
     setCurrentPage,
     setTotalUsersCount,
     toggleIsLoading,
-    toggleFollowingInProgress
+    toggleFollowingInProgress,
+    getUsers,
+    followOk,
+    unfollowOk
 } from '../../redux/usersReducer'
 import Preloader from '../Common/Preloader'
-import { UserAPI } from './../../api/api';
 
 
 class UsersAPI extends React.Component {
     componentDidMount() {
-        this.props.toggleIsLoading(true)
-        UserAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-                this.props.setUsers(data.items)
-                this.props.setTotalUsersCount(data.totalCount)
-                this.props.toggleIsLoading(false)
-            })
+        this.props.getUsers(this.props.currentPage, this.props.pageSize) 
     }
     
-    onPageChanged = (i) => {
-        this.props.toggleIsLoading(true)
-        this.props.setCurrentPage(i)
-        UserAPI.getUsers(i, this.props.pageSize).then(data => {
-                this.props.setUsers(data.items)
-                this.props.toggleIsLoading(false)
-            })
+    onPageChanged = (pageNumber) => {
+        this.props.getUsers(pageNumber, this.props.pageSize) 
     }
 
     render() {
@@ -43,7 +35,9 @@ class UsersAPI extends React.Component {
                     toggleFollow = {this.props.toggleFollow}
                     toggleFollowingInProgress = {this.props.toggleFollowingInProgress}
                     followingInProgress = {this.props.followingInProgress}
-                    users = {this.props.users} /> }
+                    users = {this.props.users}
+                    unfollowOk = {this.props.unfollowOk}
+                    followOk = {this.props.followOk} /> }
         </div>
         )
     }
@@ -66,7 +60,10 @@ const mapDispatchToProps =  {
         setCurrentPage,
         setTotalUsersCount,
         toggleIsLoading,
-        toggleFollowingInProgress
+        toggleFollowingInProgress,
+        getUsers,
+        followOk, 
+        unfollowOk
 }
 
 const UserContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPI)

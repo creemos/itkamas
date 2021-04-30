@@ -1,3 +1,5 @@
+import { UserAPI } from './../api/api';
+
 let initialState = {
     users: [/*
         {
@@ -64,7 +66,7 @@ const usersReducer = (state = initialState, action) => {
         case 'FOLLOWING-IN-PROGRESS': {
             return {...state, followingInProgress: action.followingInProgress ?
                    [...state.followingInProgress, action.id] : 
-                   state.followingInProgress.filter(id => id != action.id)}
+                   state.followingInProgress.filter(id => id !== action.id)}
         }
         default: return state
     }
@@ -110,5 +112,43 @@ export const toggleFollowingInProgress = (followingInProgress, id) => {
         type: 'FOLLOWING-IN-PROGRESS', followingInProgress, id
     }
 }
+
+export const getUsers = (currentPage, pageSize) => {
+    return (dispatch) => {
+        dispatch(toggleIsLoading(true))
+            UserAPI.getUsers(currentPage, pageSize).then(data => {
+                    dispatch(setUsers(data.items))
+                    dispatch(setTotalUsersCount(data.totalCount))
+                    dispatch(toggleIsLoading(false))
+                })
+    }
+}
+
+export const followOk = (id) => {
+    return (dispatch) => {
+        dispatch(toggleFollowingInProgress(true, id))
+        UserAPI.unfollowUser(id)
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(toggleFollow(id))
+                dispatch(toggleFollowingInProgress(false, id))
+            }
+        })
+    }
+} 
+
+export const unfollowOk = (id) => {
+    return (dispatch) => {
+        dispatch(toggleFollowingInProgress(true, id))
+            UserAPI.followUser(id)
+            .then(response => {
+                    if (response.data.resultCode === 0) {
+                        dispatch(toggleFollow(id))
+                        dispatch(toggleFollowingInProgress(false, id))
+                    }
+                })
+    }
+}
+
 
 export default usersReducer

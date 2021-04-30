@@ -1,7 +1,6 @@
 import React from 'react'
 import classes from './Users.module.css'
 import {Link} from 'react-router-dom'
-import { UserAPI }from '../../api/api'
 
 const Users = (props) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
@@ -13,27 +12,13 @@ const Users = (props) => {
         pages.push(i)
     }
     const toggleFollow = (user) => {
-        
         if (user.followed) {
-            props.toggleFollowingInProgress(true, user.id)
-            UserAPI.unfollowUser(user.id)
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    props.toggleFollow(user.id)
-                    props.toggleFollowingInProgress(false, user.id)
-                }
-            })
+            props.followOk(user.id)
         } else {
-            props.toggleFollowingInProgress(true, user.id)
-            UserAPI.followUser(user.id)
-            .then(response => {
-                    if (response.data.resultCode === 0) {
-                        props.toggleFollow(user.id)
-                        props.toggleFollowingInProgress(false, user.id)
-                    }
-                })
+            props.unfollowOk(user.id)
         }
     }
+    
     return ( 
         <div>
             <div> {pages.map(i => {
