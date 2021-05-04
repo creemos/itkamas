@@ -25,6 +25,7 @@ const Dialogs = (props) => {
         props.onChangeMessage(text)
     }
 
+
     return (
             <div className={classes.dialogs}>
                 <div className={classes.dialogItems}>

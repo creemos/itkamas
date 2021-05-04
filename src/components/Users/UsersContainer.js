@@ -13,6 +13,8 @@ import {
     unfollowOk
 } from '../../redux/usersReducer'
 import Preloader from '../Common/Preloader'
+import { withAuthRedirect } from '../hoc/authRedirect'
+import { compose } from 'redux'
 
 
 class UsersAPI extends React.Component {
@@ -25,6 +27,7 @@ class UsersAPI extends React.Component {
     }
 
     render() {
+
         return ( 
         <div>
             {this.props.isLoading ? <Preloader /> : 
@@ -42,6 +45,7 @@ class UsersAPI extends React.Component {
         )
     }
 }
+
 
 const mapStateToProps = (state) => {
     return {
@@ -66,6 +70,7 @@ const mapDispatchToProps =  {
         unfollowOk
 }
 
-const UserContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPI)
-
-export default UserContainer
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withAuthRedirect)
+    (UsersAPI)

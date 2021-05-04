@@ -18,6 +18,8 @@ const Users = (props) => {
             props.unfollowOk(user.id)
         }
     }
+
+    
     
     return ( 
         <div>
