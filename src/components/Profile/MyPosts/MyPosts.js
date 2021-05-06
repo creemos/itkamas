@@ -1,4 +1,5 @@
 import React from 'react'
+import AddPostForm from './AddPostForm'
 import classes from './MyPosts.module.css'
 import Post from './Post/Post'
 
@@ -7,27 +8,16 @@ const MyPosts = (props) => {
       return <Post key = {p.id} message={p.text} likesCount={p.likesCount} />
     })
 
-    let newPostElement = React.createRef()
 
-    let onAddPost = () => {
-      props.addPost()
+    let onAddPost = (data) => {
+      props.addPost(data.newPostText)
     }
-
-    let onTextChange = () => {
-        let text = newPostElement.current.value 
-        props.onTextChange(text)
-    }
-
+    
     return (
         <div className={classes.posts}>
           <h2>My posts</h2>
-          <div className={classes.addPostForm}>
-            <textarea ref={newPostElement} 
-                      value = {props.profilePage.newPostText} 
-                      placeholder='Write new post'
-                      onChange={ onTextChange }/>
-            <button onClick={ onAddPost }>Add post</button>
-          </div>
+          <AddPostForm 
+            onSubmit={onAddPost}/>
           <div className={classes.posts}>
             { postsData }
           </div>

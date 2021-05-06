@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import {updatePostTextActionCreator, addPostActionCreator} from '../../../redux/store'
+import {addPostActionCreator} from '../../../redux/store'
 import MyPosts from './MyPosts'
 
 
@@ -11,11 +11,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addPost: () => {
-            dispatch(addPostActionCreator())
-        },
-        onTextChange: (text) => {
-            dispatch(updatePostTextActionCreator(text))
+        addPost: (text) => {
+            dispatch(addPostActionCreator(text))
         }
     }
 }

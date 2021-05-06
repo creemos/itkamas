@@ -2,18 +2,8 @@ import { profileAPI, UserAPI } from './../api/api';
 
 let initialState = {
 
-    posts: [{
-            id: 1,
-            text: 'first post!',
-            likesCount: 22
-        },
-        {
-            id: 2,
-            text: 'second post!',
-            likesCount: 8
-        }
+    posts: [
     ],
-    newPostText: '',
     profile: null,
     status: ''
 }
@@ -24,15 +14,14 @@ export const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'ADD-POST': {
             let newPost = {
-                id: 5,
-                text: state.newPostText,
+                id: Math.round(Math.random(1000)*50),
+                text: action.text,
                 likesCount: 0
             }
             newState = {
                 ...state,
                 posts: [...state.posts, newPost]
             }
-            newState.newPostText = ''
             return newState
         }
         case 'UPDATE-POST-TEXT': {

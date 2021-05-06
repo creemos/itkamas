@@ -1,4 +1,4 @@
-import { UserAPI } from './../api/api';
+import { authAPI, UserAPI } from './../api/api';
 
 let initialState = {
     userId: null,
@@ -40,6 +40,17 @@ export const getAuth = () => {
             if (response.data.resultCode === 0) {
                 let {login, id, email} = response.data.data
                 dispatch(setAuthUserData(id, email, login))
+            }
+        })
+    }
+}
+
+export const getLogin = (data) => {
+    return dispatch => {
+        authAPI.login(data)
+        .then(response => {
+            if (response.resultCode === 0) {
+                console.log('Success!')
             }
         })
     }

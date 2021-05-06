@@ -2,9 +2,10 @@ import React from 'react'
 import DialogItem from './DialogItem'
 import Messages from './Messages'
 import classes from './Dialogs.module.css'
+import DialogForm from './DialogForm';
 
 const Dialogs = (props) => {
-    let {dialogsData, messagesData, messageText} = props
+    let {dialogsData, messagesData} = props
 
     let newDialogsData = dialogsData.map(item => {
         return <DialogItem name={item.name} id={item.id} key={item.id} />
@@ -14,17 +15,9 @@ const Dialogs = (props) => {
         return <Messages text={item.text} key={item.id}/>
     })
 
-    let newMessageText = React.createRef()
-
-    let addMessage = () => {
-        props.addMessage()
+    let addMessage = (data) => {
+        props.addMessage(data.dialogInput)
     }
-
-    let onChangeMessage = (e) => {
-        let text = e.target.value
-        props.onChangeMessage(text)
-    }
-
 
     return (
             <div className={classes.dialogs}>
@@ -33,14 +26,7 @@ const Dialogs = (props) => {
                 </div>
                 <div className={classes.messages}>
                     {newMessagesData}
-                    <div className={classes.addMessageForm}>
-                        <textarea   ref={newMessageText} 
-                                    placeholder='Write message'
-                                    value={messageText} 
-                                    onChange={onChangeMessage}></textarea>
-                        <button button onClick={ addMessage }>Add message</button>
-                    </div>
-                    
+                    <DialogForm  onSubmit={addMessage}/>
                 </div>
             </div>
     )

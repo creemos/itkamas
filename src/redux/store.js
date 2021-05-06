@@ -62,9 +62,7 @@ let store = {
                     id: 3,
                     text: 'nobody listen'
                 }
-            ],
-
-            messageText: 'new message'
+            ]
         },
 
         sidebar: {}
@@ -89,30 +87,21 @@ let store = {
     }
 }
 
-export const addPostActionCreator = () => {
+export const addPostActionCreator = (text) => {
     return {
-        type: 'ADD-POST'
+        type: 'ADD-POST',
+        id: Math.round(Math.random(1000)*50),
+        text
     }
 }
 
-export const updatePostTextActionCreator = (text) => {
+export const addMessageActionCreator = (text) => {
     return {
-        type: 'UPDATE-POST-TEXT',
-        newText: text
+        type: 'ADD-MESSAGE',
+        id: Math.round(Math.random(1000)*50),
+        text
     }
 }
 
-export const addMessageActionCreator = () => {
-    return {
-        type: 'ADD-MESSAGE'
-    }
-}
-
-export const updateMessageTextActionCreator = (text) => {
-    return {
-        type: 'UPDATE-MESSAGE-TEXT',
-        newText: text
-    }
-}
 
 export default store

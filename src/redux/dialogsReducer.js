@@ -47,14 +47,13 @@ export const dialogsReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'ADD-MESSAGE': {
             let newMessage = {
-                id: 4,
-                text: state.messageText
+                id: Math.round(Math.random(1000)*50),
+                text: action.text
             }
             newState = {
                 ...state,
                 messagesData: [...state.messagesData, newMessage] 
             }
-            newState.messageText = ''
             return newState
         }
 
