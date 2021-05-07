@@ -21,3 +21,8 @@
   text-decoration: none;
   font-weight: bold;
 }
+
+.logoutSpan {
+  border: darkgreen 1px solid;
+  padding: 3px;
+}

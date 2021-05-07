@@ -13,8 +13,7 @@ export const authReducer = (state = initialState, action) => {
         case 'SET-USER-DATA': {
             return {
                 ...state,
-                ...action.data,
-                isAuth: true
+                ...action.data
             }
         }
 
@@ -33,37 +32,31 @@ export const setAuthUserData = (userId, email, login, isAuth) => {
     }
 }
 
-export const getAuth = () => {
-    return dispatch => {
-        UserAPI.auth()
+export const getAuth = () => (dispatch) => {
+    UserAPI.auth()
         .then(response => {
             if (response.data.resultCode === 0) {
                 let {login, id, email} = response.data.data
                 dispatch(setAuthUserData(id, email, login, true))
             }
         })
-    }
 }
 
-export const getLogin = (email, password, rememberMe ) => {
-    return dispatch => {
-        authAPI.login(email, password, rememberMe)
+export const getLogin = (email, password, rememberMe ) => (dispatch) => {
+    authAPI.login(email, password, rememberMe)
         .then(response => {
-            if (response.resultCode === 0) {
+            if (response.data.resultCode === 0) {
                 dispatch(getAuth())
             }
         })
-    }
 }
 
-export const delLogin = () => {
-    return dispatch => {
-        authAPI.logout()
+export const delLogin = () => (dispatch) => {
+    authAPI.logout()
         .then(response => {
-            if (response.resultCode === 0) {
-                console.log('Success logOut!')
+            if (response.data.resultCode === 0) {
                 dispatch(setAuthUserData(null, null, null, false))
+                console.log('Success logOut!')
             }
         })
-    }
 }

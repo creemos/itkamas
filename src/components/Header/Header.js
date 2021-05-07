@@ -9,7 +9,7 @@ const Header = (props) => {
     <header className={classes.header}>
         <img src={logo} alt='noimage'/>
         <div className={classes.loginBlock}>
-            {!props.isAuth ? <Link to='/login'>LOGIN</Link> : <div>{props.login} <button onClick={props.delLogin}>Logout</button></div>}
+            {!props.isAuth ? <Link to='/login'>LOGIN</Link> : <div>{props.login} <span className={classes.logoutSpan} onClick={props.delLogin}>Logout</span></div>}
         </div>
     </header>
     )
