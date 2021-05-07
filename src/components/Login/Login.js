@@ -5,13 +5,8 @@ import { connect } from 'react-redux';
 
 const Login = (props) => {
 
-    const submit = values => {
-        let dataLogin = {
-            email: values.email,
-            password: values.password,
-            rememberMe: values.rememberMe
-        }
-        props.getLogin(dataLogin)
+    const submit = ({email, password, rememberMe}) => {
+        props.getLogin(email, password, rememberMe)
     }
 
     return (

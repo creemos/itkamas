@@ -10,7 +10,7 @@
     color: red;
 }
 
-span {
+.formControl span {
     color: red;
     margin-left: 5px;
 }
