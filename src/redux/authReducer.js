@@ -1,3 +1,4 @@
+import { stopSubmit } from 'redux-form';
 import { authAPI, UserAPI } from './../api/api';
 
 let initialState = {
@@ -43,10 +44,13 @@ export const getAuth = () => (dispatch) => {
 }
 
 export const getLogin = (email, password, rememberMe ) => (dispatch) => {
+    
     authAPI.login(email, password, rememberMe)
         .then(response => {
             if (response.data.resultCode === 0) {
                 dispatch(getAuth())
+            } else {
+                dispatch(stopSubmit('login', {_error: 'Incorrect login or password!'}))
             }
         })
 }

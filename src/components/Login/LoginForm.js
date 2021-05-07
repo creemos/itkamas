@@ -1,11 +1,13 @@
 import {Field, reduxForm} from 'redux-form'
 import { Input } from '../Common/FormControls/FormControls'
 import { requiredField, minLengthValidatorCreator } from './../../Utils/Validators/Validators';
+import classes from './Login.module.css'
 
 let minLength8 = minLengthValidatorCreator(8)
 
 let LoginForm = (props) => {
     const {handleSubmit} = props
+    debugger
 
     return (
         <form onSubmit={handleSubmit}>
@@ -31,6 +33,7 @@ let LoginForm = (props) => {
                     type={'checkbox'}/>
                 RememberMe
             </div>
+            {props.error && <div className={classes.loginError}>{props.error}</div>}
             <div>
                 <button type='submit'>Submit</button>
             </div>
