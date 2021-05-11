@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
  
 const ProfileStatusWithHooks = (props) =>  {
 
@@ -11,6 +11,10 @@ const ProfileStatusWithHooks = (props) =>  {
         setEditMode(false)
     }
 
+    useEffect(() => {
+        setStatus(props.status)
+    }, [props.status])
+
     return (
         <div>
             {!editMode && 
@@ -21,6 +25,7 @@ const ProfileStatusWithHooks = (props) =>  {
             {editMode &&
                 <div>
                     <input autoFocus={true} 
+                        value = {status}
                         onBlur = {saveStatus}
                         onChange={e => setStatus(e.currentTarget.value)}/>
                 </div> 
