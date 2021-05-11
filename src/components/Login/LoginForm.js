@@ -7,7 +7,6 @@ let minLength8 = minLengthValidatorCreator(8)
 
 let LoginForm = (props) => {
     const {handleSubmit} = props
-    debugger
 
     return (
         <form onSubmit={handleSubmit}>
