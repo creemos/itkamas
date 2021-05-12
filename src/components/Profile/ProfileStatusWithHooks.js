@@ -5,8 +5,7 @@ const ProfileStatusWithHooks = (props) =>  {
     let [editMode, setEditMode] = useState(false) 
     let [status, setStatus] = useState(props.status)
 
-    const saveStatus = (e) => {
-        setStatus(e.currentTarget.value)
+    const saveStatus = (status) => {
         props.updateStatus(status)
         setEditMode(false)
     }

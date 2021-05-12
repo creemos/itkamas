@@ -6,11 +6,12 @@ import Post from './Post/Post'
 const MyPosts = (props) => {
     let postsData = props.profilePage.posts.map( p => {
       return <Post key = {p.id} message={p.text} likesCount={p.likesCount} />
-    })
+    }).reverse()
 
 
     let onAddPost = (data) => {
       props.addPost(data.newPostText)
+      data.newPostText = ''
     }
     
     return (
