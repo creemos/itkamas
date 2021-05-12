@@ -38,6 +38,10 @@ export const profileReducer = (state = initialState, action) => {
             return {...state, status: action.status}
         }
 
+        case 'SAVE-USERS-PHOTO': {
+            return {...state, photos: action.photos}
+        }
+
         default: {
             return state
         }
@@ -56,6 +60,12 @@ export const setStatus = (status) => {
     }
 }
 
+export const savePhotoSuccess = (photos) => {
+    return {
+        type: 'SAVE-USERS-PHOTO', photos
+    }
+}
+
 export const getStatus = (userId = 2) => (dispatch) => {
     profileAPI.getStatus(userId)
         .then(response => {
@@ -63,11 +73,22 @@ export const getStatus = (userId = 2) => (dispatch) => {
         })
     }
 
+
+
 export const updateStatus = status => dispatch => {
         profileAPI.updateStatus(status)
             .then(response => {
                 if (response.data.resultCode === 0) {
                     dispatch(setStatus(status))  
+                }
+            })
+        }
+        
+export const savePhoto = file => dispatch => {
+        profileAPI.saveUsersPhoto(file)
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    dispatch(savePhotoSuccess(response.data.data.photos))
                 }
             })
         }

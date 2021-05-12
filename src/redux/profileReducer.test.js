@@ -1,14 +1,14 @@
-import {profileReducer} from './profileReducer';
-import { addPostActionCreator } from './profileReducer';
+import { profileReducer } from './profileReducer';
+import { addPostActionCreator } from "./store";
 
 
 it('adding new post', () => {
-    let action = addPostActionCreator('its test post')
+    let action = addPostActionCreator('its test post');
     let state = {
         posts: []
-    }
-    let newState = profileReducer(state, action)
+    };
+    let newState = profileReducer(state, action);
 
-    expect(newState.posts.length).toBe(1)
+    expect(newState.posts.length).toBe(1);
 })
 
