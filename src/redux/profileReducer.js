@@ -42,6 +42,11 @@ export const profileReducer = (state = initialState, action) => {
             return {...state, photos: action.photos}
         }
 
+        case 'UPDATE-USERS-INFO': {
+            return {...state, profile: action.profile}
+        }
+
+
         default: {
             return state
         }
@@ -100,4 +105,15 @@ export const getUserProfile = (userId) => {
                     dispatch(setUserProfile(response.data))
         })
     }
+}
+
+export const updateUsersProfile = data => dispatch => {
+    profileAPI.updateProfile(data)
+        .then(response => {
+            debugger
+            if (response.data.resultCode === 0) {
+                dispatch(getUserProfile(data.userId))
+            }
+        }
+    )
 }
