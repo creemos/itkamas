@@ -1,9 +1,3 @@
-import {
-    profileReducer
-} from './profileReducer'
-import {
-    dialogsReducer
-} from './dialogsReducer'
 
 let store = {
 
@@ -72,33 +66,34 @@ let store = {
         return this._state
     },
 
-    subscribe(observer) {
+    subscribe(observer: any) {
         this.rerenderFullTree = observer
     },
 
     rerenderFullTree() {
         console.log('state changed')
     },
-
-    dispatch(action) {
+/*
+    dispatch(action: any) {
         this._state.profilePage = profileReducer(this._state.profilePage, action)
         this._state.messagesPage = dialogsReducer(this._state.messagesPage, action)
-        this.rerenderFullTree(this._state)
+        this.rerenderFullTree()
     }
+    */
 }
 
-export const addPostActionCreator = (text) => {
+export const addPostActionCreator = (text: string) => {
     return {
         type: 'ADD-POST',
-        id: Math.round(Math.random(1000)*50),
+        id: Math.round(Math.random()*50),
         text
     }
 }
 
-export const addMessageActionCreator = (text) => {
+export const addMessageActionCreator = (text: string) => {
     return {
         type: 'ADD-MESSAGE',
-        id: Math.round(Math.random(1000)*50),
+        id: Math.round(Math.random()*50),
         text
     }
 }

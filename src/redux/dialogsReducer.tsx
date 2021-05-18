@@ -1,4 +1,11 @@
-let initialState = {
+type InitialStateType = {
+    dialogsData: Array<{name: string, id: number}>
+    messagesData: Array<{id: number, text: string}>
+    messageText: string
+}
+
+
+let initialState: InitialStateType = {
     dialogsData: [{
             name: 'Misha',
             id: 1
@@ -6,22 +13,6 @@ let initialState = {
         {
             name: 'Sasha',
             id: 2
-        },
-        {
-            name: 'Ann',
-            id: 3
-        },
-        {
-            name: 'Olya',
-            id: 4
-        },
-        {
-            name: 'Dima',
-            id: 5
-        },
-        {
-            name: 'Max',
-            id: 6
         }
     ],
 
@@ -42,12 +33,12 @@ let initialState = {
     messageText: ''
 }
 
-export const dialogsReducer = (state = initialState, action) => {
+export const dialogsReducer = (state: typeof initialState = initialState, action: any): InitialStateType => {
     let newState
     switch (action.type) {
         case 'ADD-MESSAGE': {
             let newMessage = {
-                id: Math.round(Math.random(1000)*50),
+                id: Math.round(Math.random()*50),
                 text: action.text
             }
             newState = {

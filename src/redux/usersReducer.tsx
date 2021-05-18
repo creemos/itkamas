@@ -1,20 +1,21 @@
-import { UserAPI } from './../api/api';
+import { UserAPI } from '../api/api';
 
 let initialState = {
-    users: [/*
+    users: [
         {
-            id: 1,
+            id: null,
             photos: {
-                'small': 'https://avotar.ru/avatar/minony/avatarka.gif'
+                small: null,
+                large: null
             },
-            name: 'Vasya D.',
+            name: null,
             location: {
-                city: 'Saratov',
-                country: 'Belarus'
+                city: null,
+                country: null
             },
-            status: 'Learn React',
-            followed: true
-        },
+            status: null,
+            followed: false
+        } /*
         {
             id: 2,
             photos: {
@@ -37,7 +38,7 @@ let initialState = {
 }
 
 
-const usersReducer = (state = initialState, action) => {
+const usersReducer = (state: typeof initialState = initialState, action: any) => {
     switch (action.type) {
         case 'FOLLOW-TOGGLE': {
             let newState = {...state, 
@@ -72,49 +73,49 @@ const usersReducer = (state = initialState, action) => {
     }
 }
 
-export const toggleFollow = id => {
+export const toggleFollow = (id: number) => {
     return {
         type: 'FOLLOW-TOGGLE',
         userId: id
     }
 }
 
-export const setUsers = (users) => {
+export const setUsers = (users: Array<any>) => {
     return {
         type: 'SET-USERS',
         users
     }
 }
 
-export const setCurrentPage = (currentPage) => {
+export const setCurrentPage = (currentPage: number) => {
     return {
         type: 'SET-CURRENT-PAGE',
         currentPage
     }
 }
 
-export const setTotalUsersCount = (totalUsersCount) => {
+export const setTotalUsersCount = (totalUsersCount: number) => {
     return {
         type: 'SET-TOTAL-USERS-COUNT',
         totalUsersCount
     }
 }
 
-export const toggleIsLoading = (isLoading) => {
+export const toggleIsLoading = (isLoading: boolean) => {
     return {
         type: 'TOGGLE-IS-LOADING',
         isLoading
     }
 }
 
-export const toggleFollowingInProgress = (followingInProgress, id) => {
+export const toggleFollowingInProgress = (followingInProgress: boolean, id: number) => {
     return {
         type: 'FOLLOWING-IN-PROGRESS', followingInProgress, id
     }
 }
 
-export const getUsers = (currentPage, pageSize) => {
-    return (dispatch) => {
+export const getUsers = (currentPage: number, pageSize: number) => {
+    return (dispatch: (arg0: { type: string; isLoading?: boolean; users?: Array<any>; totalUsersCount?: number; currentPage?: number; }) => void) => {
         dispatch(toggleIsLoading(true))
             UserAPI.getUsers(currentPage, pageSize)
                 .then(data => {
@@ -126,8 +127,8 @@ export const getUsers = (currentPage, pageSize) => {
     }
 }
 
-export const followOk = (id) => {
-    return (dispatch) => {
+export const followOk = (id: number) => {
+    return (dispatch: (arg0: { type: string; followingInProgress?: boolean; id?: number; userId?: number; }) => void) => {
         dispatch(toggleFollowingInProgress(true, id))
         UserAPI.unfollowUser(id)
         .then(response => {
@@ -139,8 +140,8 @@ export const followOk = (id) => {
     }
 } 
 
-export const unfollowOk = (id) => {
-    return (dispatch) => {
+export const unfollowOk = (id: number) => {
+    return (dispatch: (arg0: { type: string; followingInProgress?: boolean; id?: number; userId?: number; }) => void) => {
         dispatch(toggleFollowingInProgress(true, id))
             UserAPI.followUser(id)
             .then(response => {

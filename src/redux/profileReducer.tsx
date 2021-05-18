@@ -1,20 +1,40 @@
-import { profileAPI, UserAPI } from './../api/api';
+import { profileAPI, UserAPI } from '../api/api';
 
-let initialState = {
-
-    posts: [
-    ],
-    profile: null,
-    status: ''
+type ProfileType = {
+    userId?: number
+    aboutMe?: string
+    lookingForAJob?: boolean
+    lookingForAJobDescription?: string
+    fullName?: string
+    photos?: Array<{small: string | null, large: string | null}> 
+    contacts?: {
+        github: string
+        vk: string
+        facebook: string
+        instagram: string
+        twitter: string
+        website: string
+        youtube: string
+        mainLink: string
+    }
 }
 
+let initialState = {
+    posts: [
+    ] as Array<{id: number, text: string, likesCount: number} | null>,
+    profile: null as ProfileType | null,
+    status: '',
+    newPostText: ''
+}
 
-export const profileReducer = (state = initialState, action) => {
+type InitialStateType = typeof initialState
+
+export const profileReducer = (state: typeof initialState = initialState, action: any): InitialStateType => {
     let newState
     switch (action.type) {
         case 'ADD-POST': {
             let newPost = {
-                id: Math.round(Math.random(1000)*50),
+                id: Math.round(Math.random()*50),
                 text: action.text,
                 likesCount: 0
             }
@@ -39,7 +59,7 @@ export const profileReducer = (state = initialState, action) => {
         }
 
         case 'SAVE-USERS-PHOTO': {
-            return {...state, photos: action.photos}
+            return {...state, profile: {...state.profile, photos: action.photos}}
         }
 
         case 'UPDATE-USERS-INFO': {
@@ -53,25 +73,40 @@ export const profileReducer = (state = initialState, action) => {
     }
 }
 
-export const setUserProfile = (profile) => {
+type setUserProfileActionType = {
+    type: 'SET-USER-PROFILE'
+    profile: Array<any>
+}
+
+export const setUserProfile = (profile: Array<any>): setUserProfileActionType => {
     return {
         type: 'SET-USER-PROFILE', profile
     }
 }
 
-export const setStatus = (status) => {
+type setStatusActionType = {
+    type: 'SET-STATUS'
+    status: string
+}
+
+export const setStatus = (status: string): setStatusActionType => {
     return {
         type: 'SET-STATUS', status
     }
 }
 
-export const savePhotoSuccess = (photos) => {
+type savePhotoSuccessActionType = {
+    type: 'SAVE-USERS-PHOTO', photos: any
+}
+
+export const savePhotoSuccess = (photos: any): savePhotoSuccessActionType => {
     return {
         type: 'SAVE-USERS-PHOTO', photos
     }
 }
 
-export const getStatus = (userId = 2) => (dispatch) => {
+
+export const getStatus = (userId: number) => (dispatch: any) => {
     profileAPI.getStatus(userId)
         .then(response => {
             dispatch(setStatus(response.data))  
@@ -80,7 +115,7 @@ export const getStatus = (userId = 2) => (dispatch) => {
 
 
 
-export const updateStatus = status => dispatch => {
+export const updateStatus = (status: string) => (dispatch: any) => {
         profileAPI.updateStatus(status)
             .then(response => {
                 if (response.data.resultCode === 0) {
@@ -89,7 +124,7 @@ export const updateStatus = status => dispatch => {
             })
         }
         
-export const savePhoto = file => dispatch => {
+export const savePhoto = (file: any) => (dispatch: any) => {
         profileAPI.saveUsersPhoto(file)
             .then(response => {
                 if (response.data.resultCode === 0) {
@@ -98,8 +133,8 @@ export const savePhoto = file => dispatch => {
             })
         }
 
-export const getUserProfile = (userId) => {
-    return dispatch => {
+export const getUserProfile = (userId: number) => {
+    return (dispatch: any) => {
         UserAPI.getProfile(userId)
             .then(response => {
                     dispatch(setUserProfile(response.data))
@@ -107,7 +142,7 @@ export const getUserProfile = (userId) => {
     }
 }
 
-export const updateUsersProfile = data => dispatch => {
+export const updateUsersProfile = (data: any) => (dispatch: any) => {
     profileAPI.updateProfile(data)
         .then(response => {
             debugger
