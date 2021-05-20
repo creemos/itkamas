@@ -4,19 +4,44 @@ import Messages from './Messages'
 import classes from './Dialogs.module.css'
 import DialogForm from './DialogForm';
 
-const Dialogs = (props) => {
+type DialogsType = {
+    dialogsData: any
+    messagesData: any
+    addMessage: (text: string) => void
+}
+
+export type DialogInputType = {
+    dialogInput: string
+}
+
+export type DialogFormDataType = {
+    values: DialogInputType
+}
+
+type DialogsItemType = {
+    name: string
+    id: number
+    key: number
+}
+
+type MessagesItemsType = {
+    id: number
+    text: string
+}
+
+const Dialogs: React.FC<DialogsType> = (props) => {
     let {dialogsData, messagesData} = props
 
-    let newDialogsData = dialogsData.map(item => {
+    let newDialogsData: Array<DialogsItemType> = dialogsData.map((item: {name: string, id: number, key: number}) => {
         return <DialogItem name={item.name} id={item.id} key={item.id} />
     })
 
-    let newMessagesData = messagesData.map(item => {
+    let newMessagesData: Array<MessagesItemsType> = messagesData.map((item: {id: number, text: string}) => {
         return <Messages text={item.text} key={item.id}/>
     })
 
-    let addMessage = (data) => {
-        props.addMessage(data.dialogInput)
+    const addMessage = (values: DialogInputType) => {
+        props.addMessage(values.dialogInput)
     }
 
     return (
