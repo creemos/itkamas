@@ -1,11 +1,19 @@
 import React from 'react'
-import { Field, reduxForm } from 'redux-form';
-import { Input } from './../../Common/FormControls/FormControls'
+import { Field, reduxForm, InjectedFormProps } from 'redux-form';
+import { Input } from '../../Common/FormControls/FormControls'
 import classes from './Info.module.css'
 
+type EditProfileFormPropsType = {
+  profile: {
+    fullName: string
+    aboutMe: string
+    lookingForAJobDescription: string
+    contacts: any
+  }
+  setEditMode: (value: boolean) => void
+}
 
-
-let EditProfileForm = (props) => {
+let EditProfileForm: React.FC<InjectedFormProps & EditProfileFormPropsType> = (props) => {
     const {handleSubmit} = props
     return (
       <form onSubmit={handleSubmit}>
@@ -21,6 +29,6 @@ let EditProfileForm = (props) => {
     )
 }
 
-EditProfileForm = reduxForm({form: 'editProfileForm'})(EditProfileForm)
+let EditProfileFormExp = reduxForm<{}, any>({form: 'editProfileForm'})(EditProfileForm)
 
-export default EditProfileForm 
+export default EditProfileFormExp 

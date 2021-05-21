@@ -7,16 +7,13 @@ import DialogForm from './DialogForm';
 type DialogsType = {
     dialogsData: any
     messagesData: any
-    addMessage: (text: string) => void
+    addMessageDAC: (values: DialogInputType) => void
 }
 
 export type DialogInputType = {
     dialogInput: string
 }
 
-export type DialogFormDataType = {
-    values: DialogInputType
-}
 
 type DialogsItemType = {
     name: string
@@ -30,7 +27,7 @@ type MessagesItemsType = {
 }
 
 const Dialogs: React.FC<DialogsType> = (props) => {
-    let {dialogsData, messagesData} = props
+    let {dialogsData, messagesData, addMessageDAC} = props
 
     let newDialogsData: Array<DialogsItemType> = dialogsData.map((item: {name: string, id: number, key: number}) => {
         return <DialogItem name={item.name} id={item.id} key={item.id} />
@@ -40,8 +37,8 @@ const Dialogs: React.FC<DialogsType> = (props) => {
         return <Messages text={item.text} key={item.id}/>
     })
 
-    const addMessage = (values: DialogInputType) => {
-        props.addMessage(values.dialogInput)
+    const addMessage = (values: any) => {
+        addMessageDAC(values.dialogInput)
     }
 
     return (

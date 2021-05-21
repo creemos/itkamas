@@ -1,12 +1,12 @@
 import React from 'react'
-import { Field, reduxForm } from "redux-form"
+import { Field, InjectedFormProps, reduxForm } from "redux-form"
 import classes from './MyPosts.module.css'
-import { maxLengthValidatorCreator, requiredField } from './../../../Utils/Validators/Validators';
-import { Textarea } from './../../Common/FormControls/FormControls';
+import { maxLengthValidatorCreator, requiredField } from '../../../Utils/Validators/Validators';
+import { Textarea } from '../../Common/FormControls/FormControls';
 
 let maxLength100 = maxLengthValidatorCreator(100)
 
-let AddPostForm = (props) => {
+let AddPostForm: React.FC<InjectedFormProps> = (props) => {
     const {handleSubmit} = props
 
     return (
@@ -23,6 +23,6 @@ let AddPostForm = (props) => {
     )
 }
 
-AddPostForm = reduxForm({form: 'addPostForm'})(AddPostForm)
+let AddPostFormExp = reduxForm({form: 'addPostForm'})(AddPostForm)
 
-export default AddPostForm
+export default AddPostFormExp

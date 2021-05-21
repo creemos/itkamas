@@ -16,7 +16,12 @@ import { compose } from 'redux'
 import { successInitApp } from './redux/appReducer';
 import Preloader from './components/Common/Preloader';
 
-class App extends React.Component {
+interface AppInterface {
+    successInitApp: () => void
+    initialized: boolean
+}
+
+class App extends React.Component<AppInterface> {
 
     componentDidMount() {
         this.props.successInitApp()
@@ -39,7 +44,7 @@ class App extends React.Component {
                     <Route path='/settings' component={() => <MainSettings/>}/>
                     <Route path='/music' component={() => <Music/>}/>
                     <Route path='/users' component={() => <UsersContainer/>}/>
-                    <Route path='/login' component={() => <Login/>}/>
+                    <Route path='/login' component={() => <Login />}/>
                 </div>
             </div>
         );
@@ -47,10 +52,16 @@ class App extends React.Component {
     
 }
 
-const mapStateToProps = (state) => ({
+type AppMSTPType = {
+    app: {
+        initialized: boolean
+    }
+}
+
+const mapStateToProps = (state: AppMSTPType) => ({
     initialized: state.app.initialized
 })
 
-export default compose(
+export default compose<React.FC>(
     withRouter,
     connect(mapStateToProps, {successInitApp}))(App);

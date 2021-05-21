@@ -3,15 +3,15 @@ import {addPostActionCreator} from '../../../redux/store'
 import MyPosts from './MyPosts'
 
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: {profilePage: any}) => {
     return {
         profilePage: state.profilePage
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: any) => {
     return {
-        addPost: (text) => {
+        addPost: (text: string) => {
             dispatch(addPostActionCreator(text))
         }
     }

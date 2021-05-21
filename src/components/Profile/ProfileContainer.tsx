@@ -1,12 +1,26 @@
 import React from 'react'
 import {connect} from 'react-redux' 
 import Profile from './Profile'
-import { withRouter } from 'react-router'
-import { getUserProfile, getStatus, updateStatus, savePhoto, updateUsersProfile } from './../../redux/profileReducer';
-import { withAuthRedirect } from './../hoc/authRedirect';
+import { withRouter, RouteComponentProps } from 'react-router'
+import { getUserProfile, getStatus, updateStatus, savePhoto, updateUsersProfile } from '../../redux/profileReducer';
+import { withAuthRedirect } from '../hoc/authRedirect';
 import { compose } from 'redux';
 
-class ProfileContainer extends React.Component {
+interface ProfileContainerInterface {
+    id: number
+    updateUsersProfile: () => void
+    savePhoto: () => void
+    profile: any
+    status: string
+    updateStatus: () => void
+    getUserProfile: (id: number) => void
+    getStatus: (id: number) => void
+}
+
+interface HomeProps extends RouteComponentProps<any> {
+}
+
+class ProfileContainer extends React.Component<ProfileContainerInterface & HomeProps> {
 
     componentDidMount() {
         let userId = this.props.match.params.userId
@@ -27,7 +41,19 @@ class ProfileContainer extends React.Component {
     }
 }
 
-let mapStateToProps = (state) => {
+type ProfileContainerMSTPType = {
+    profilePage: {
+        profile: any
+        status: string
+    }
+    auth: {
+        login: string
+        userId: number
+        isAuth: boolean
+    }
+}
+
+let mapStateToProps = (state: ProfileContainerMSTPType) => {
     return {
         profile: state.profilePage.profile,
         login: state.auth.login,
@@ -37,7 +63,7 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default compose(
+export default compose<React.FC>(
     connect(mapStateToProps, {getUserProfile, getStatus, updateStatus, savePhoto, updateUsersProfile}),
     withRouter,
     withAuthRedirect

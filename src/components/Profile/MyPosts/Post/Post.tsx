@@ -1,7 +1,12 @@
 import React, {useState} from 'react'
 import classes from './Post.module.css'
 
-const Post = ({message, likesCount}) => {
+type PostPropsType = {
+  message: string
+  likesCount: number
+}
+
+const Post: React.FC<PostPropsType> = ({message, likesCount}) => {
 
   const [likes, setLikes] = useState(likesCount)
     return (

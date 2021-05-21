@@ -1,7 +1,12 @@
 import React from 'react';
 import { Component } from 'react';
  
-class ProfileStatus extends Component {
+interface ProfileStatusInterface {
+    status: string
+    updateStatus: (value: string) => void
+}
+
+class ProfileStatus extends Component<ProfileStatusInterface> {
 
     state = {
         editMode: false,
@@ -17,13 +22,13 @@ class ProfileStatus extends Component {
         this.props.updateStatus(this.state.status)
     }
 
-    onStatusChange = (e) => {
+    onStatusChange = (e: {currentTarget: HTMLInputElement}) => {
         this.setState(
             {status: e.currentTarget.value}
         )
     }
 
-    componentDidUpdate(prevProps, prevState){
+    componentDidUpdate(prevProps: ProfileStatusInterface, prevState: ProfileStatusInterface){
         if (prevProps.status !== this.props.status) {
             this.setState({status: this.state.status})
         }

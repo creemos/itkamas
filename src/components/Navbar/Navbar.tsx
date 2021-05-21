@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import classes from './Navbar.module.css'
 
-const Nav = () => {
+const Nav: React.FC<any> = () => {
     return (
         <nav className={classes.nav}>
         <div className={classes.item}><Link to='/profile'>Profile</Link></div>

@@ -145,7 +145,6 @@ export const getUserProfile = (userId: number) => {
 export const updateUsersProfile = (data: any) => (dispatch: any) => {
     profileAPI.updateProfile(data)
         .then(response => {
-            debugger
             if (response.data.resultCode === 0) {
                 dispatch(getUserProfile(data.userId))
             }

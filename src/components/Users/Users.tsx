@@ -2,7 +2,20 @@ import React from 'react'
 import classes from './Users.module.css'
 import {Link} from 'react-router-dom'
 
-const Users = (props) => {
+type UsersPropsType = {
+totalUsersCount: number
+pageSize: number
+followOk: (id: number) => void
+unfollowOk: (id: number) => void
+currentPage: number
+onPageChanged: (pageNumber: number) => void
+users: Array<any>
+followingInProgress: Array<number>
+toggleFollowingInProgress: () => void
+toggleFollow: (data: {id: number, followed: boolean, name: string, status: string}) => void
+}
+
+const Users: React.FC<UsersPropsType> = (props) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
     if (pagesCount > 30) {
         pagesCount = 30
@@ -11,7 +24,7 @@ const Users = (props) => {
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
     }
-    const toggleFollow = (user) => {
+    const toggleFollow = (user: {followed: boolean, id: number}) => {
         if (user.followed) {
             props.followOk(user.id)
         } else {
@@ -22,7 +35,7 @@ const Users = (props) => {
     return ( 
         <div>
             <div> {pages.map(i => {
-                            return <span key={`page-${i}`} className = {props.currentPage === i ? classes.selectedPage : null} onClick = {(e) => {props.onPageChanged(i)}} > | {i} | </span>
+                            return <span key={`page-${i}`} className = {props.currentPage === i ? classes.selectedPage: ''} onClick = {(e) => {props.onPageChanged(i)}} > | {i} | </span>
                         })} 
             <hr />
             </div> 

@@ -7,7 +7,6 @@ import { maxLengthValidatorCreator, requiredField } from '../../Utils/Validators
 let maxLength100 = maxLengthValidatorCreator(100)
 
 type Props  = { 
-    handleSubmit: any
 }
 
 

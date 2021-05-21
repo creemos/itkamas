@@ -1,11 +1,16 @@
 import React, {useEffect, useState} from 'react';
  
-const ProfileStatusWithHooks = (props) =>  {
+type ProfileStatusWithHooksPropsType = {
+    status: string
+    updateStatus: (value: string) => void
+}
 
-    let [editMode, setEditMode] = useState(false) 
-    let [status, setStatus] = useState(props.status)
+const ProfileStatusWithHooks: React.FC<ProfileStatusWithHooksPropsType> = (props) =>  {
 
-    const saveStatus = (status) => {
+    let [editMode, setEditMode] = useState<boolean>(false) 
+    let [status, setStatus] = useState<string>(props.status)
+
+    const saveStatus = () => {
         props.updateStatus(status)
         setEditMode(false)
     }
@@ -17,7 +22,7 @@ const ProfileStatusWithHooks = (props) =>  {
     return (
         <div>
             {!editMode && 
-                <div onClick = {() => {editMode = setEditMode(true)}}>
+                <div onClick = {() => setEditMode(true)}>
                     <span><b>Status: </b>{props.status}</span>
                 </div> 
             }

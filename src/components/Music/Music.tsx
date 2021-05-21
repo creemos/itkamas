@@ -1,11 +1,11 @@
 import React from 'react'
 
-const News = () => {
+const Music: React.FC<any> = () => {
     return (
         <div>
-            News
+            Music
         </div>
     )
 }
 
-export default News
+export default Music

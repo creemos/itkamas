@@ -1,11 +1,12 @@
-import {Field, reduxForm} from 'redux-form'
+import {Field, reduxForm, InjectedFormProps} from 'redux-form'
 import { Input } from '../Common/FormControls/FormControls'
-import { requiredField, minLengthValidatorCreator } from './../../Utils/Validators/Validators';
+import { requiredField, minLengthValidatorCreator } from '../../Utils/Validators/Validators';
 import classes from './Login.module.css'
 
 let minLength8 = minLengthValidatorCreator(8)
 
-let LoginForm = (props) => {
+
+let LoginForm: React.FC<InjectedFormProps> = (props) => {
     const {handleSubmit} = props
 
     return (
@@ -40,7 +41,7 @@ let LoginForm = (props) => {
     )
 }
 
-LoginForm = reduxForm({form: 'login'})(LoginForm)
+let LoginFormExp = reduxForm({form: 'login'})(LoginForm)
 
 
-export default LoginForm
+export default LoginFormExp
