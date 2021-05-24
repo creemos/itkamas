@@ -3,6 +3,7 @@ import { getLogin } from "../../redux/authReducer";
 import LoginForm from "./LoginForm";
 import { connect } from "react-redux";
 import { Redirect } from "react-router"
+import { AppStateType } from "../../redux/reduxStore";
 
 type LoginPropsType = {
   isAuth: boolean;
@@ -26,13 +27,8 @@ const Login: React.FC<LoginPropsType> = (props) => {
   );
 };
 
-type LoginMSTPType = {
-  auth: {
-    isAuth: boolean;
-  };
-};
 
-const mapStateToProps = (state: LoginMSTPType) => ({
+const mapStateToProps = (state: AppStateType) => ({
   isAuth: state.auth.isAuth,
 });
 

@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import Header from "./Header";
 import { delLogin } from "../../redux/authReducer";
+import { AppStateType } from "../../redux/reduxStore";
 
 interface HeaderContainerType {
   isAuth: boolean;
@@ -22,9 +23,9 @@ class HeaderContainer extends React.Component<HeaderContainerType> {
   }
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: AppStateType) => ({
   isAuth: state.auth.isAuth,
-  id: state.auth.id,
+  id: state.auth.userId,
   login: state.auth.login,
 });
 

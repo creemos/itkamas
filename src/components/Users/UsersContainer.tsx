@@ -15,6 +15,7 @@ import {
 import Preloader from "../Common/Preloader";
 import { withAuthRedirect } from "../hoc/authRedirect";
 import { compose } from "redux";
+import { AppStateType } from "../../redux/reduxStore";
 
 interface UserAPIInterface {
   getUsers: (currentPage: number, pageSize: number) => void;
@@ -63,18 +64,8 @@ class UsersAPI extends React.Component<UserAPIInterface> {
   }
 }
 
-type UsersContainerMSTPType = {
-  usersPage: {
-    users: Array<any>;
-    pageSize: number;
-    totalUsersCount: number;
-    currentPage: number;
-    isLoading: boolean;
-    followingInProgress: Array<number>;
-  };
-};
 
-const mapStateToProps = (state: UsersContainerMSTPType) => {
+const mapStateToProps = (state: AppStateType) => {
   return {
     users: state.usersPage.users,
     pageSize: state.usersPage.pageSize,

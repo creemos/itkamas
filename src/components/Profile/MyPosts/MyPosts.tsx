@@ -2,23 +2,22 @@ import React from 'react'
 import AddPostForm from './AddPostForm'
 import classes from './MyPosts.module.css'
 import Post from './Post/Post'
+import {PostType} from '../../types/types'
 
-type MyPostsPropsType = {
-  profilePage: {
-    posts: Array<{
-      id: number
-      text: string
-      likesCount: number
-    }>
-  }
-  addPost: (value: string) => void
+export type MapPropsType = {
+  posts: Array<PostType>
 }
 
-const MyPosts: React.FC<MyPostsPropsType> = (props) => {
-    let postsData = props.profilePage.posts.map( p => {
-      return <Post key = {p.id} message={p.text} likesCount={p.likesCount} />
-    }).reverse()
+export type DispatchPropsType = {
+  addPost: (text: string) => void
+}
 
+const MyPosts: React.FC<MapPropsType & DispatchPropsType> = (props) => {
+    let postsData = [...props.posts]
+    .reverse()
+    .map( (p) => {
+      return <Post key = {p.id} message={p.text} likesCount={p.likesCount} />
+    })
 
     let onAddPost = (data: any) => {
       props.addPost(data.newPostText)

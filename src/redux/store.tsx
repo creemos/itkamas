@@ -82,7 +82,7 @@ let store = {
     */
 }
 
-export const addPostActionCreator = (text: string) => {
+export const addPostActionCreator = (text: string): AddPostActionCreatorType => {
     return {
         type: 'ADD-POST',
         id: Math.round(Math.random()*50),
@@ -90,13 +90,25 @@ export const addPostActionCreator = (text: string) => {
     }
 }
 
-export const addMessageActionCreator = (text: string) => {
+export type AddPostActionCreatorType = {
+    type: 'ADD-POST'
+    id: number
+    text: string
+}
+
+export const addMessageActionCreator = (text: string): AddMessageActionCreatorType => {
     return {
         type: 'ADD-MESSAGE',
         id: Math.round(Math.random()*50),
         text
     }
 }
+
+export type AddMessageActionCreatorType = {
+  type: "ADD-MESSAGE";
+  id: number;
+  text: string;
+};
 
 
 export default store

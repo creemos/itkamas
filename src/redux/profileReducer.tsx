@@ -1,33 +1,19 @@
 import { profileAPI, UserAPI } from '../api/api';
+import { ProfileType } from '../components/types/types';
 
-type ProfileType = {
-    userId?: number
-    aboutMe?: string
-    lookingForAJob?: boolean
-    lookingForAJobDescription?: string
-    fullName?: string
-    photos?: Array<{small: string | null, large: string | null}> 
-    contacts?: {
-        github: string
-        vk: string
-        facebook: string
-        instagram: string
-        twitter: string
-        website: string
-        youtube: string
-        mainLink: string
-    }
-}
+
 
 let initialState = {
     posts: [
-    ] as Array<{id: number, text: string, likesCount: number} | null>,
+    ] as Array<{id: number, text: string, likesCount: number}>,
     profile: null as ProfileType | null,
     status: '',
     newPostText: ''
 }
 
 type InitialStateType = typeof initialState
+
+
 
 export const profileReducer = (state: typeof initialState = initialState, action: any): InitialStateType => {
     let newState

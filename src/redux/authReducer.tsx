@@ -2,17 +2,17 @@ import { stopSubmit } from 'redux-form';
 import { authAPI, UserAPI } from '../api/api';
 
 type InitialStateType = {
-    userId: number | null
-    email: string | null
-    login: string | null
+    userId: number 
+    email: string 
+    login: string 
     isLoading: boolean 
     isAuth: boolean
 }
 
 let initialState: InitialStateType = {
-    userId: null,
-    email: null,
-    login: null,
+    userId: 1,
+    email: 'init',
+    login: 'init',
     isLoading: false,
     isAuth: false
 }

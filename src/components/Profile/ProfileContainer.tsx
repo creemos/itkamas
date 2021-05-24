@@ -5,6 +5,7 @@ import { withRouter, RouteComponentProps } from 'react-router'
 import { getUserProfile, getStatus, updateStatus, savePhoto, updateUsersProfile } from '../../redux/profileReducer';
 import { withAuthRedirect } from '../hoc/authRedirect';
 import { compose } from 'redux';
+import { AppStateType } from '../../redux/reduxStore';
 
 interface ProfileContainerInterface {
     id: number
@@ -41,19 +42,7 @@ class ProfileContainer extends React.Component<ProfileContainerInterface & HomeP
     }
 }
 
-type ProfileContainerMSTPType = {
-    profilePage: {
-        profile: any
-        status: string
-    }
-    auth: {
-        login: string
-        userId: number
-        isAuth: boolean
-    }
-}
-
-let mapStateToProps = (state: ProfileContainerMSTPType) => {
+let mapStateToProps = (state: AppStateType) => {
     return {
         profile: state.profilePage.profile,
         login: state.auth.login,
